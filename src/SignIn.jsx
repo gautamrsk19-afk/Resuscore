@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TrendingUp, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 
 const FONT_LINK_ID = "resuscore-fonts";
-
+// for using fonts
 function useFonts() {
   useEffect(() => {
     if (document.getElementById(FONT_LINK_ID)) return;
@@ -33,7 +33,7 @@ const TOKENS = {
 function isValidEmail(v) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
-
+//for signing this
 export default function SignIn({ onSignIn }) {
   useFonts();
   const [email, setEmail] = useState("");
@@ -63,7 +63,8 @@ export default function SignIn({ onSignIn }) {
       onSignIn({ email });
     }, 600);
   };
-
+// TODO: replace with real API call once the FastAPI auth endpoint exists,
+    // e.g. POST /auth/login { email, password } -> { token, recruiter }
   return (
     <div
       style={{
@@ -78,7 +79,7 @@ export default function SignIn({ onSignIn }) {
       }}
     >
       <div style={{ width: "100%", maxWidth: 380 }}>
-        {/* Logo */}
+        {/* Logo here */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "center", marginBottom: 32 }}>
           <div
             style={{
