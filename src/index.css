@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -31,7 +29,7 @@
     font-size: 16px;
   }
 }
-/* media*/
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -51,7 +49,7 @@
     filter: invert(1) brightness(2);
   }
 }
-/*
+
 body {
   margin: 0;
 }
@@ -111,4 +109,3 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
->>>>>>> bc44f5eed748397a83c8a2b85d30797742ccf41c
