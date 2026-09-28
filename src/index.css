@@ -29,7 +29,7 @@
     font-size: 16px;
   }
 }
-
+/* media*/
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -49,7 +49,7 @@
     filter: invert(1) brightness(2);
   }
 }
-
+/*
 body {
   margin: 0;
 }
