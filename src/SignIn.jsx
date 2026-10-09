@@ -3,17 +3,7 @@ import { TrendingUp, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 
 const FONT_LINK_ID = "resuscore-fonts";
 // for using fonts
-function useFonts() {
-  useEffect(() => {
-    if (document.getElementById(FONT_LINK_ID)) return;
-    const link = document.createElement("link");
-    link.id = FONT_LINK_ID;
-    link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap";
-    document.head.appendChild(link);
-  }, []);
-}
+
 
 const TOKENS = {
   bg: "#14171D",
