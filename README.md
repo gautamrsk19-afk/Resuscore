@@ -1,1 +1,1 @@
-ResuScore is an AI-powered resume screening and candidate ranking application designed to help recruiters streamline the hiring process. The platform provides a recruiter sign-in interface and is designed to screen resumes, analyze candidate information, and rank applicants based on relevant criteria. ResuScore uses a modern dark-themed interface with a clean and professional design, making the application easy to navigate and suitable for recruitment workflows.
+
