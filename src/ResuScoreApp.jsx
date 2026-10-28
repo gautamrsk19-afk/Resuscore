@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-
-
 const IconUpload = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
     <path d="M12 15V4M12 4L7.5 8.5M12 4l4.5 4.5" strokeLinecap="round" strokeLinejoin="round" />
