@@ -1,0 +1,6 @@
+{
+  "name": "ResuScore - AI Resume Scorer & ATS Matcher",
+  "description": "The AI resume scorer built for college students. Check ATS match rates, extract critical keyword gaps, and dispatch verified scorecards directly to your email inbox.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

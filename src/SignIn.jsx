@@ -279,7 +279,7 @@ export default function SignIn({ onSignIn }) {
             fontFamily: "'Inter', sans-serif",
           }}
         >
-          Demo mode — any valid-looking email/password signs in.
+          Know Your Score
         </div>
       </div>
     </div>
