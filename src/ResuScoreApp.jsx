@@ -1,17 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-const IconUpload = (props) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
-    <path d="M12 15V4M12 4L7.5 8.5M12 4l4.5 4.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
 
-const IconFile = (props) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
-    <path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" strokeLinejoin="round" />
-    <path d="M14 3v5h5" strokeLinejoin="round" />
-  </svg>
-);
 
 const IconTarget = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
