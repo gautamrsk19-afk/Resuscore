@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 
- * Usage:
- *   import ResuScoreApp from "./ResuScoreApp";
- *   export default function App() { return <ResuScoreApp />; }
- */
+
 
 /* ---------------------------------- Icons --------------------------------- */
 /* Minimal 1.5px-stroke line icons, no external icon library needed. */
