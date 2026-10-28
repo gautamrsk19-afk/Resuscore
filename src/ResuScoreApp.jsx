@@ -1,12 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
-/**
- * ResuScore — resume scanning & scoring interface
- * -------------------------------------------------
- * Drop this file into any React project (Vite, CRA, Next.js client component, etc).
- * No external UI libraries required — icons are inline SVG, styling is a single
- * injected <style> tag, fonts are pulled from Google Fonts at runtime.
- *
+
  * Usage:
  *   import ResuScoreApp from "./ResuScoreApp";
  *   export default function App() { return <ResuScoreApp />; }
