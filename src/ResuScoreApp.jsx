@@ -759,4 +759,14 @@ const CSS = `
   color: var(--text-secondary);
 }
 
-
+@media (prefers-reduced-motion: reduce) {
+  .rs-status-scanning .rs-status-dot,
+  .rs-scanline,
+  .rs-analyze-btn,
+  .gauge-fill,
+  .rs-bar-fill {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+`;
