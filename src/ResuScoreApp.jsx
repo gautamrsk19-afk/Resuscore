@@ -13,13 +13,7 @@ const IconFile = (props) => (
   </svg>
 );
 
-const IconTarget = (props) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
-    <circle cx="12" cy="12" r="8" />
-    <circle cx="12" cy="12" r="4" />
-    <circle cx="12" cy="12" r="0.6" fill="currentColor" stroke="none" />
-  </svg>
-);
+
 
 const IconShield = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
