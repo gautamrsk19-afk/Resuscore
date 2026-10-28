@@ -1,267 +1,253 @@
-export interface UserProfile {
-  name: string;
-  email: string;
-  university: string;
-  gradYear: string;
-  avatarUrl?: string;
-  applicationsTracked: number;
-}
+import { CandidateAnalysis, HistoryRun, BenchmarkDomain, BenchmarkThreshold } from '../types/resume';
 
-export interface ScorecardReport {
-  id: string;
-  candidateName: string;
-  candidateEmail: string;
-  jobTitle: string;
-  company: string;
-  location: string;
-  overallScore: number;
-  tier: string;
-  percentile: string;
-  deliveredAt: string;
-  envelope: {
-    messageId: string;
-    dkim: string;
-    targetAts: string;
-    benchmarkCohort: string;
-  };
+export const initialAnalysis: CandidateAnalysis = {
+  id: 'run-alex-chen-v3',
+  fileName: 'Alex_Chen_Resume.pdf',
+  targetRole: 'Lead Product Architect, Distributed Systems. Requires Go, Kubernetes, event-driven design, and quantifiable latency/throughput reduction.',
+  overallScore: 88,
+  percentile: 'Top 7th Percentile',
+  matchRating: 'Excellent candidate match',
   metrics: {
-    jobMatch: number;
-    bulletRigor: number;
-    parsability: number;
-  };
-  wins: Array<{
-    title: string;
-    description: string;
-    verbs?: string[];
-    badge?: string;
-    skills?: string[];
-  }>;
-  criticalGaps: Array<{
-    name: string;
-    tag: string;
-  }>;
-  expectedLift: string;
-  targetTierNote: string;
-  impactDeficit: {
-    count: number;
-    description: string;
-    currentBullet: string;
-    upgradedBullet: string;
-    highlightKey?: string;
-    highlightMetric?: string;
-    impactGain: string;
-  };
-  pdfFileName: string;
-  pdfFileSize: string;
-  previewUrl?: string | false;
-}
-
-export interface RecentScanItem {
-  id: string;
-  company: string;
-  initial: string;
-  jobTitle: string;
-  location: string;
-  score: number;
-  fitText: string;
-  skillsCount: string;
-  tier: 'High ATS Match' | 'Needs Improvement' | 'Good ATS Match';
-  scannedTime: string;
-  reportData?: ScorecardReport;
-}
-
-export const defaultUser: UserProfile = {
-  name: 'Alex Chen',
-  email: 'Gautam.RSK19@gmail.com', // Active target email matching user request
-  university: 'UC Berkeley',
-  gradYear: "'26",
-  applicationsTracked: 4,
-};
-
-export const sampleJobPresets = [
-  {
-    company: 'Datadog',
-    jobTitle: 'Software Engineer Intern - Summer 2025',
-    location: 'New York, NY (Hybrid)',
-    seniority: 'Internship / Co-op',
-    domain: 'Distributed Systems & Backend',
-    description: `We're seeking a Software Engineering Intern to join our Core Metrics team for Summer 2025. You will build highly available distributed backend systems handling petabytes of telemetry using Go, Python, and AWS.
-
-Responsibilities:
-• Design and maintain microservices and distributed storage engines processing over 10M events per second.
-• Build scalable backend pipelines in Go / Golang, Python, and REST APIs.
-• Deploy and maintain cloud infrastructure utilizing Docker, Kubernetes, and AWS CloudWatch observability tools.
-• Benchmark low-latency network communication using gRPC and Kafka messaging queues.`,
-    keywordsFound: ['Python', 'Distributed Systems', 'REST APIs', 'Git / CI', 'Docker'],
-    keywordsMissing: ['Go / Golang', 'Kubernetes', 'AWS CloudWatch', 'gRPC', 'Kafka'],
+    atsCompatibility: 94,
+    impactMetrics: 82,
+    skillsAlignment: 89,
+    brevityStructure: 86,
   },
-  {
-    company: 'Stripe',
-    jobTitle: 'SWE Intern (Backend)',
-    location: 'San Francisco, CA (Hybrid)',
-    seniority: 'Internship / Co-op',
-    domain: 'Distributed Systems & Backend',
-    description: `Stripe is looking for ambitious Software Engineering Interns to join our core financial infrastructure engineering team. You will build robust distributed ledger primitives, secure payment APIs, and real-time fraud mitigation microservices.
-
-Requirements:
-• Experience with Go, Java, or Ruby backend web frameworks.
-• Strong foundation in algorithms, concurrency, and SQL database transactions.
-• Familiarity with CI/CD deployment pipelines, containerization, and distributed systems.`,
-    keywordsFound: ['Distributed Systems', 'Go / Python', 'REST APIs', 'SQL'],
-    keywordsMissing: ['CI/CD Pipelines', 'Kafka', 'Ruby', 'High Concurrency'],
+  keyStrengths: [
+    'Strong quantified outcomes: 84% of work history bullets include hard KPIs, latencies, or revenue metrics.',
+    'ATS standard typography: Standard headers (Experience, Skills, Education) parsed with 0 serialization faults.',
+    'Clear seniority arc: Clean title trajectory from Staff Engineer to Principal Architecture lead.'
+  ],
+  priorityFixes: [
+    'Missing technical keyword: Target role references Distributed Consensus (Raft/Paxos).',
+    'Overlong bullet length: Earliest role (2018-2020) exceeds 36 words on bullet 3. Tighten to preserve cadence.'
+  ],
+  estimatedUplift: '+6.4 points',
+  parserSignal: 'High',
+  itemsValidated: 3,
+  inspection: {
+    pages: 1,
+    wordCount: 482,
+    densityStatus: 'Optimal density',
+    densityWindow: '420-550 window',
+    hash: 'sha256:7f3a8b',
+    fileSize: '1.4 MB parsed',
+    fileName: 'Alex_Chen_Resume.pdf',
+    atsStandardLevel: 'Pass • Level 1',
   },
-  {
-    company: 'Figma',
-    jobTitle: 'Frontend Engineer Intern',
-    location: 'San Francisco, CA (Hybrid)',
-    seniority: 'Internship / Co-op',
-    domain: 'Frontend & Full-Stack',
-    description: `Figma's Editor team is hiring Frontend Engineering Interns. Work with WebAssembly, WebGL, TypeScript, and modern React architectures to deliver high-frame-rate canvas experiences directly in the browser.`,
-    keywordsFound: ['TypeScript', 'React', 'Git', 'REST APIs', 'Node.js'],
-    keywordsMissing: ['WebAssembly', 'WebGL', 'Canvas Optimization'],
-  },
-  {
-    company: 'Snowflake',
-    jobTitle: 'Backend Developer Co-op',
-    location: 'San Mateo, CA',
-    seniority: 'Internship / Co-op',
-    domain: 'Distributed Systems & Backend',
-    description: `Snowflake data cloud is seeking a Backend Developer Co-op to optimize query compilation engines, distributed storage caches, and SQL executors.`,
-    keywordsFound: ['SQL', 'Python', 'C++', 'Git', 'Linux'],
-    keywordsMissing: ['Distributed Caching', 'Query Optimization', 'Rust'],
-  },
-];
+  rawTextPreview: `ALEX CHEN
+San Francisco, CA • alex.chen@example.io • linkedin.com/in/alexchen-arch • github.com/alexchen
 
-export const sampleResumeText = `ALEX CHEN
-San Francisco, CA • Gautam.RSK19@gmail.com • (555) 234-5678 • linkedin.com/in/alexchen-eng • github.com/alexchen-dev
-
-EDUCATION
-University of California, Berkeley
-B.S. in Electrical Engineering & Computer Sciences (EECS)
-GPA: 3.86/4.0 | Expected Graduation: May 2026
-Coursework: Distributed Systems (CS162), Data Structures (CS61B), Algorithms (CS170), Database Systems (CS186)
-
-TECHNICAL SKILLS
-Languages: Python, Java, C++, TypeScript, SQL, Bash
-Technologies & Tools: React, Node.js, Express, Git/CI, PostgreSQL, Redis, REST APIs, Linux, Agile
+SUMMARY
+Principal Distributed Systems Architect with 9+ years designing high-throughput transaction backbones, microservice orchestrations, and cloud-native Kubernetes infrastructure. Pioneered multi-region failover handling 1.8M req/sec with p99 latency < 14ms.
 
 EXPERIENCE
-Campus Labs — Undergraduate Software Engineer Intern
-Berkeley, CA | Jun 2024 – Aug 2024
-• Architected microservice endpoint handling student course evaluations and feedback queries.
-• Spearheaded Redis caching layer reducing database query response latency by 35%.
-• Optimized SQL indexing queries for 50,000+ active university users across campus departments.
-• Benchmarked performance metrics and deployed automated regression tests across continuous deployment cycles.
+Staff Distributed Systems Engineer | Horizon Cloud Systems (2022 - Present)
+• Re-architected core messaging pipelines using Go and Kafka, cutting p99 query latency from 85ms to 12ms and reducing compute footprint by 34%.
+• Authored custom Kubernetes CRDs and multi-cluster ingress routing, supporting 45+ autonomous deployment microservices across 3 cloud regions.
+• Mentored 14 senior engineers across distributed consensus patterns, fault-tolerant state synchronization, and gRPC contracts.
 
-PROJECTS
-Fault-Tolerant Distributed Key-Value Store
-• Built key-value store using Raft consensus algorithm for distributed systems lab.
-• Implemented leader election, log replication, and heartbeat mechanisms across multi-node topologies.
-• Conducted stress tests simulating network partitions and packet delays to verify state consistency.
+Senior Backend Infrastructure Lead | Nexus Payments (2020 - 2022)
+• Built zero-loss distributed payment reconciliation ledger processing $4.2B in annualized transactional volume.
+• Implemented distributed telemetry and OpenTelemetry tracing across 120 services, reducing mean-time-to-detection (MTTD) by 62%.
+• Modernized continuous integration pipelines with automated Canary rollouts and static analysis checks.
 
-Real-Time Collaborative Code Editor
-• Developed web-based collaborative programming environment using TypeScript, WebSocket, and React.
-• Integrated operational transformation algorithms to synchronize simultaneous keystrokes among 8+ concurrent users.
-• Containerized client and server modules with Docker for streamlined local development.
+Senior Systems Software Engineer | DataStream Labs (2018 - 2020)
+• Designed fault-tolerant ingestion pipelines consuming 40TB daily telemetry metrics using PostgreSQL partitioning and Redis caching layer.
+• Spearheaded containerization migration from bare-metal VMs to Docker orchestrations, achieving 99.995% operational uptime SLA.
 
-LEADERSHIP & AFFILIATIONS
-• Technical Lead, Computer Science Mentorship Association (CSMA)
-• Member, Eta Kappa Nu (IEEE Honor Society)`;
+EDUCATION & SKILLS
+B.S. in Computer Science, UC Berkeley (Honors)
+Core Competencies: Go, Python, Kubernetes, Docker, Distributed Systems, gRPC, Kafka, PostgreSQL, Terraform, Redis, CI/CD.`,
+  extractedKeywords: {
+    matched: [
+      { keyword: 'React', count: 4 },
+      { keyword: 'Python', count: 6 },
+      { keyword: 'FastAPI', count: 2 },
+      { keyword: 'TypeScript', count: 5 },
+      { keyword: 'Docker', count: 3 },
+      { keyword: 'PostgreSQL', count: 2 },
+      { keyword: 'REST APIs', count: 3 },
+    ],
+    gaps: [
+      {
+        keyword: 'System Design',
+        impact: '+8.4 pts impact',
+        reason: 'Present in 87% of tier-1 senior tech postings. Add architecture keywords.',
+      },
+      {
+        keyword: 'CI / CD Pipelines',
+        impact: '+5.1 pts impact',
+        reason: 'Critical for DevOps and Full-stack parsers (GitHub Actions, Argo, Jenkins).',
+      },
+    ],
+    alignment: 78.4,
+  },
+};
 
-export const initialRecentScans: RecentScanItem[] = [
+export const sampleHistoryRuns: HistoryRun[] = [
   {
-    id: 'scan-figma-1',
-    company: 'Figma',
-    initial: 'F',
-    jobTitle: 'Frontend Engineer Intern',
-    location: 'San Francisco, CA (Hybrid)',
-    score: 84,
-    fitText: 'Strong fit',
-    skillsCount: '11 / 13 skills',
-    tier: 'High ATS Match',
-    scannedTime: '2 days ago',
+    id: 'run-1',
+    fileName: 'Senior_Fullstack_Resume_v3.pdf',
+    version: 'v3.2',
+    targetRole: 'Staff Software Engineer',
+    timestamp: '2026-09-29T06:15:00Z',
+    relativeTime: '2 hrs ago',
+    matchType: 'Strong Match',
+    atsParsedPercent: 98,
+    scoreDelta: '+7 pts vs v2',
+    deltaHighlight: '↑ Optimized impact verbs',
+    compositeScore: 88,
   },
   {
-    id: 'scan-robinhood-2',
-    company: 'Robinhood',
-    initial: 'R',
-    jobTitle: 'Product Management Intern',
-    location: 'Menlo Park, CA',
-    score: 62,
-    fitText: 'Gaps found',
-    skillsCount: '6 / 14 skills',
-    tier: 'Needs Improvement',
-    scannedTime: '1 week ago',
+    id: 'run-2',
+    fileName: 'TechLead_Application_v2.pdf',
+    version: 'v2.1',
+    targetRole: 'Engineering Manager / Lead',
+    timestamp: '2026-09-28T09:30:00Z',
+    relativeTime: 'Yesterday',
+    matchType: 'Moderate Match',
+    atsParsedPercent: 91,
+    scoreDelta: '+7 pts vs v1',
+    deltaHighlight: 'Needs quantified metrics',
+    compositeScore: 81,
   },
   {
-    id: 'scan-snowflake-3',
-    company: 'Snowflake',
-    initial: 'S',
-    jobTitle: 'Backend Developer Co-op',
-    location: 'San Mateo, CA',
-    score: 78,
-    fitText: 'Good alignment',
-    skillsCount: '9 / 12 skills',
-    tier: 'Good ATS Match',
-    scannedTime: 'Jan 12, 2025',
+    id: 'run-3',
+    fileName: 'Product_Engineer_CV.pdf',
+    version: 'v1.4',
+    targetRole: 'Product Architect',
+    timestamp: '2026-09-26T14:20:00Z',
+    relativeTime: '3 days ago',
+    matchType: 'Needs Polish',
+    atsParsedPercent: 84,
+    scoreDelta: '+6 pts vs baseline',
+    deltaHighlight: 'Over-length section: 2 pages',
+    compositeScore: 74,
+    formatFlags: 3,
+  },
+  {
+    id: 'run-4',
+    fileName: 'Frontend_Dev_Base.pdf',
+    version: 'v1.0',
+    targetRole: 'Frontend Engineer',
+    timestamp: '2026-09-22T11:00:00Z',
+    relativeTime: '1 week ago',
+    matchType: 'Draft',
+    atsParsedPercent: 78,
+    scoreDelta: 'Baseline',
+    deltaHighlight: 'Baseline evaluation',
+    compositeScore: 68,
   },
 ];
 
-export const defaultScorecardReport: ScorecardReport = {
-  id: 'rep-datadog-swe-2025',
-  candidateName: 'Alex Chen',
-  candidateEmail: 'Gautam.RSK19@gmail.com',
-  jobTitle: 'Software Engineer Intern',
-  company: 'Datadog',
-  location: 'New York, NY (Hybrid)',
-  overallScore: 76,
-  tier: 'Tier 1 Competitive Fit',
-  percentile: 'Top 22%',
-  deliveredAt: 'Oct 24, 2025 • 10:14 AM EST',
-  envelope: {
-    messageId: '<rec-score-2025-1024-datadog-swe@ai.resuscore.internal>',
-    dkim: 'PASS (resuscore.ai ed25519-sha256)',
-    targetAts: 'Greenhouse Greenhouse-API-v2 / Datadog Early Talent Pipeline',
-    benchmarkCohort: 'Fall 2025 Tier-1 SWE Interns (n=1,420 parsed resumes)',
+export const benchmarkDomains: BenchmarkDomain[] = [
+  {
+    id: 'domain-1',
+    domainNumber: 'DOMAIN 01',
+    title: 'Software Engineering & Dev',
+    iconName: 'code',
+    score: 82,
+    percentile: 'Top 12%',
+    impactScore: 88,
+    parsabilityScore: 96,
+    keywordsScore: 74,
+    verifiedSample: '4,120',
+    isActive: false,
+    roleDescriptionSample: 'Senior Software Engineer with experience in cloud architectures, microservices, and distributed pipelines.'
   },
-  metrics: {
-    jobMatch: 72,
-    bulletRigor: 58,
-    parsability: 95,
+  {
+    id: 'domain-2',
+    domainNumber: 'DOMAIN 02',
+    title: 'Product & Eng. Management',
+    iconName: 'network',
+    score: 85,
+    percentile: 'Top 9%',
+    impactScore: 92,
+    parsabilityScore: 90,
+    keywordsScore: 81,
+    verifiedSample: '1,840',
+    isActive: true,
+    roleDescriptionSample: 'Technical Product Lead / Engineering Manager driving roadmap velocity, cross-functional engineering, and product KPIs.'
   },
-  wins: [
-    {
-      title: 'Strong Action Verbs',
-      description: '9 of 10 experience bullets start with high-signal technical verbs: "Architected", "Spearheaded", and "Optimized".',
-      verbs: ['Architected', 'Benchmarked', 'Deployed'],
-    },
-    {
-      title: 'Parser Readability',
-      description: 'Flawless UTF-8 plain-text parser fidelity. Standard single-page density (395 words) allows full tokenization by Greenhouse without table collisions.',
-      badge: '0 OCR conversion faults',
-    },
-    {
-      title: 'Core Stack Match',
-      description: 'High keyword correlation for fundamental infrastructure requirements:',
-      skills: ['Python', 'Distributed Systems', 'REST APIs', 'Git / CI'],
-    },
-  ],
-  criticalGaps: [
-    { name: 'Go / Golang', tag: 'Cited 5x' },
-    { name: 'Docker & Kubernetes', tag: 'Core Requirement' },
-    { name: 'AWS CloudWatch / Observability', tag: 'Preferred' },
-  ],
-  expectedLift: '+14 pts',
-  targetTierNote: 'Adding contextual references to Go or container concepts moves you to 90/100 (Tier 0 Fast-Track).',
-  impactDeficit: {
-    count: 4,
-    description: 'Datadog engineering managers look for scale markers (ops/second, latency reduction, memory optimization, or active users). General activity bullets read as passive coursework.',
-    currentBullet: '"Built key-value store using Raft consensus algorithm for distributed systems lab."',
-    upgradedBullet: '"Engineered fault-tolerant distributed key-value store in Go with Raft consensus, achieving 10,000+ ops/sec throughput under simulated partition failovers."',
-    highlightKey: 'Go with Raft consensus',
-    highlightMetric: '10,000+ ops/sec throughput',
-    impactGain: '+28% impact score',
+  {
+    id: 'domain-3',
+    domainNumber: 'DOMAIN 03',
+    title: 'Data Science & AI',
+    iconName: 'ai',
+    score: 79,
+    percentile: 'Top 18%',
+    impactScore: 76,
+    parsabilityScore: 94,
+    keywordsScore: 72,
+    verifiedSample: '2,690',
+    isActive: false,
+    roleDescriptionSample: 'Data Scientist / ML Engineer building fine-tuned LLM architectures, RAG pipelines, and high-dimensional analytics.'
   },
-  pdfFileName: 'Datadog_SWE_Intern_Scorecard_AlexChen.pdf',
-  pdfFileSize: '240 KB • Full ATS Tokenization Matrix & Line Audit',
-};
+];
+
+export const benchmarkThresholds: BenchmarkThreshold[] = [
+  {
+    range: '70 – 79',
+    title: 'ATS Passable',
+    description: 'Clears basic keyword filters and syntax parsers without flagging manual review stops.',
+    iconType: 'check',
+    isHighlighted: false,
+  },
+  {
+    range: '80 – 89',
+    title: 'Top 15% Candidate',
+    description: 'High keyword density, clear metric quantification, zero formatting parsing anomalies.',
+    iconType: 'star',
+    isHighlighted: true,
+  },
+  {
+    range: '90+',
+    title: 'High Priority Interview',
+    description: 'Exceptional relevance match. Automatically routed to talent acquisition recruiter screens.',
+    iconType: 'shield',
+    isHighlighted: false,
+  },
+];
+
+export const preloadedResumes = [
+  {
+    name: 'Alex_Chen_Resume.pdf',
+    role: 'Lead Product Architect, Distributed Systems. Requires Go, Kubernetes, event-driven design, and quantifiable latency/throughput reduction.',
+    score: 88,
+    ats: 94,
+    impact: 82,
+    skills: 89,
+    brevity: 86,
+    pages: 1,
+    words: 482,
+    hash: 'sha256:7f3a8b',
+    size: '1.4 MB parsed'
+  },
+  {
+    name: 'Elena_Rostova_StaffML.pdf',
+    role: 'Staff Machine Learning Engineer with experience in LLM serving, CUDA optimization, PyTorch, and distributed training systems.',
+    score: 92,
+    ats: 98,
+    impact: 91,
+    skills: 94,
+    brevity: 88,
+    pages: 1,
+    words: 512,
+    hash: 'sha256:9c1e4d',
+    size: '1.6 MB parsed'
+  },
+  {
+    name: 'Marcus_Vance_ProductLead.docx',
+    role: 'Group Product Manager, Enterprise Cloud Platform. B2B SaaS growth, user retention, ARR expansion, executive stakeholder coordination.',
+    score: 85,
+    ats: 92,
+    impact: 89,
+    skills: 84,
+    brevity: 83,
+    pages: 2,
+    words: 640,
+    hash: 'sha256:3a88fc',
+    size: '1.1 MB parsed'
+  }
+];
