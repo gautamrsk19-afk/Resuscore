@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
-/* ---------------------------------- Icons --------------------------------- */
-/* Minimal 1.5px-stroke line icons, no external icon library needed. */
 
 const IconUpload = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}>
